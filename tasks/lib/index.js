@@ -77,6 +77,15 @@ var createAndUploadArtifacts = function (options, done) {
                 curlOptions.push('--insecure');
             }
 
+            if (options.ssh) {
+                curlOptions.push('--key');
+                curlOptions.push(options.ssh.keyfile);
+                if (options.ssh.passphrase) {
+                    curlOptions.push('--pass');
+                    curlOptions.push(options.ssh.passphrase);
+                }
+            }
+
             var execOptions = {};
             options.cwd && (execOptions.cwd = options.cwd);
 
